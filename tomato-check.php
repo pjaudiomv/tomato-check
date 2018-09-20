@@ -12,8 +12,7 @@ $failedImports = "";
 
 
 foreach($tomatoStatus as $tomato) {
-    $currentTime =time();
-    $eightHoursAgo = $currentTime - 28800;
+    $eightHoursAgo = strtotime("-8 hours");
     $lastImport = strtotime($tomato['last_successful_import']);
     
     if ($eightHoursAgo > $lastImport) {
@@ -29,7 +28,6 @@ foreach($tomatoStatus as $tomato) {
 if ($allgood != 'good') {
     $message .= "<strong>The following root servers have missed a tomato import</strong><br /><br />";
     $message .= $failedImports;
-    echo $message;
     
     //Send Email
     $mail = new PHPMailer(true);
